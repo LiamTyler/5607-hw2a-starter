@@ -5,7 +5,7 @@
 Configuring:
 ```
 git clone --recursive https://github.com/LiamTyler/5607-hw2a-starter.git
-cd deferred-starter
+cd 5607-hw2a-starter
 mkdir build
 cd build
 cmake ..
