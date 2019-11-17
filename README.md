@@ -9,6 +9,7 @@ Configuring:
 ```
 git clone --recursive https://github.com/LiamTyler/5607-hw2a-starter.git
 cd 5607-hw2a-starter
+git checkout hw2b
 mkdir build
 cd build
 cmake ..
