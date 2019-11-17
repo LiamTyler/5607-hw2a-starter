@@ -5,7 +5,17 @@ This is the professor Victoria Interrante's code, not mine. I'm just posting thi
 
 ## Installing + Compiling
 
-Configuring:
+Configuring for HW2B:
+```
+git clone --recursive https://github.com/LiamTyler/5607-hw2a-starter.git
+cd 5607-hw2a-starter
+git checkout hw2b
+mkdir build
+cd build
+cmake ..
+```
+
+Configuring for HW2A:
 ```
 git clone --recursive https://github.com/LiamTyler/5607-hw2a-starter.git
 cd 5607-hw2a-starter
