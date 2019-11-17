@@ -26,8 +26,7 @@ add_subdirectory(ext/glfw)
 # Make a list of all the source files
 set(
     SOURCES
-    src/BasicTemplate.cpp
-
+    src/HW2b.cpp
     ext/glad/src/glad.c
 )
 
