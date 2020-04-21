@@ -26,12 +26,12 @@ add_subdirectory(ext/glfw)
 # Make a list of all the source files
 set(
     SOURCES
-    src/BasicTemplate.cpp
+    src/HW2A.cpp
 
     ext/glad/src/glad.c
 )
 
-# Make a list of all the header files
+# Make a list of all the header files (optional-- only necessary to make them appear in IDE)
 set(
     INCLUDES
     src/ShaderStuff.hpp

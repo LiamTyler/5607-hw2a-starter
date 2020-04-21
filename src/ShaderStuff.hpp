@@ -12,36 +12,39 @@ static char*
 readShaderSource(const char* shaderFile)
 {
     FILE *fp;
-	long length;
-	char *buffer;
-	
-	// open the file containing the text of the shader code
-	fp = fopen(shaderFile, "rb");
-	
-	// check for errors in opening the file
-    if ( fp == NULL ) { 
-		printf("can't open shader source file %s\n", shaderFile); 
-		return NULL; 
-	}
-	
-	// determine the file size
+    long length, count;
+    char *buffer;
+ //   struct stat fileinfo;
+    
+    // open the file containing the text of the shader code
+    fp = fopen(shaderFile, "rb");
+    
+    // check for errors in opening the file
+    if ( fp == NULL ) {
+        printf("can't open shader source file %s\n", shaderFile);
+        return NULL;
+    }
+    
+    // determine the file size
     fseek(fp, 0, SEEK_END); // move position indicator to the end of the file;
     length = ftell(fp);  // return the value of the current position
-	
-	// allocate a buffer with the indicated number of bytes, plus one
-	buffer = new char[length + 1];
-	
-	// read the appropriate number of bytes from the file
+    fprintf(stdout, "length in bytes of shader file: %ld\n", length);
+    
+    // allocate a buffer with the indicated number of bytes, plus one
+    buffer = new char[length + 1];
+    
+    // read the appropriate number of bytes from the file
     fseek(fp, 0, SEEK_SET);  // move position indicator to the start of the file
-    fread(buffer, 1, length, fp); // read all of the bytes
-	
-	// append a NULL character to indicate the end of the string
-    buffer[length] = '\0';
-	
-	// close the file
+    count = fread(buffer, 1, length, fp); // read all of the bytes
+    fprintf(stdout, "count of bytes read: %ld\n", count);
+
+    // append a NULL character to indicate the end of the string
+    buffer[count] = '\0';    //because on some systems, count != length
+    
+    // close the file
     fclose(fp);
-	
-	// return the string
+    
+    // return the string
     return buffer;
 }
 
@@ -50,7 +53,6 @@ GLuint
 InitShader(const char* vShaderFileName, const char* fShaderFileName)
 {	
 	GLuint vertex_shader, fragment_shader;
-	GLchar *vs_text, *fs_text;
 	GLuint program;
 	
 	// check GLSL version
@@ -61,26 +63,26 @@ InitShader(const char* vShaderFileName, const char* fShaderFileName)
 	fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
 	
 	// Read source code from file
-	vs_text = readShaderSource(vShaderFileName);
-	fs_text = readShaderSource(fShaderFileName);
+	std::string vs_text = readShaderSource(vShaderFileName);
+	std::string fs_text = readShaderSource(fShaderFileName);
 	
 	// error check
-	if ( vs_text == NULL ) {
+	if ( vs_text == "" ) {
 		printf("Failed to read from vertex shader file %s\n", vShaderFileName);
 		exit( 1 );
 	} else if (DEBUG_ON) {
-		printf("read shader code:\n%s\n", vs_text);
+		printf("read shader code:\n%s\n", vs_text.c_str());
 	}
-	if ( fs_text == NULL ) {
-		printf("Failed to read from fragent shader file %s\n", fShaderFileName);
+	if ( fs_text == "" ) {
+		printf("Failed to read from fragment shader file %s\n", fShaderFileName);
 		exit( 1 );
 	} else if (DEBUG_ON) {
-		printf("read shader code:\n%s\n", fs_text);
+		printf("read shader code:\n%s\n", fs_text.c_str());
 	}
 	
 	// Set shader source
-	const char *vv = vs_text;
-	const char *ff = fs_text;
+	const char *vv = vs_text.c_str();
+	const char *ff = fs_text.c_str();
 	glShaderSource(vertex_shader, 1, &vv, NULL);
 	glShaderSource(fragment_shader, 1, &ff, NULL);
 	
