@@ -5,7 +5,7 @@ This is the professor Victoria Interrante's code, not mine. I'm just posting thi
 
 ## Installing + Configuring
 
-Note: If you downloaded the ZIP file instead, just skip to the "mkdir build" step. Do note that the 2B files are on a different branch.
+Note: If you downloaded the ZIP file instead, just skip to the "mkdir build" step. Do note that the 2B files are on a 'hw2b' branch.
 
 
 Configuring for HW2B:
