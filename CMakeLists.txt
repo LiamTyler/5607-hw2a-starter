@@ -20,20 +20,24 @@ set(GLFW_BUILD_EXAMPLES  OFF CACHE BOOL " " FORCE)
 set(GLFW_BUILD_TESTS     OFF CACHE BOOL " " FORCE)
 set(GLFW_BUILD_DOCS      OFF CACHE BOOL " " FORCE)
 
+add_definitions( -DMY_SRC_DIR="${CMAKE_CURRENT_SOURCE_DIR}/src/" )
+add_definitions( -DMY_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data/" )
+
 # Now actually run cmake on the CMakeLists.txt file found inside of the GLFW directory
 add_subdirectory(ext/glfw)
 
 # Make a list of all the source files
 set(
     SOURCES
-    src/HW2b.cpp
+    src/main.cpp
     ext/glad/src/glad.c
 )
 
 # Make a list of all the header files
 set(
     INCLUDES
-    src/ShaderStuff.hpp
+    src/shader.hpp
+    src/trimesh.hpp
 )
 
 # Make a list of all of the directories to look in when doing #include "whatever.h"
